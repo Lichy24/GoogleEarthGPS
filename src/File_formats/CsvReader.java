@@ -9,9 +9,9 @@ import java.util.Date;
 import GIS.*;
 
 final public class CsvReader {
-    private int mac,SSID,firstSeen,lat,lon,alt,RSSI,channel,authMode,accuracy,Type;
-    GISLayer gis_layer;
-    public GIS_layer Read(String csv) {
+    private static int mac,SSID,firstSeen,lat,lon,alt,RSSI,channel,authMode,accuracy,Type;
+    private static GISLayer gis_layer;
+    public static GIS_layer read(String csv) {
         int count = 0;
         String line;
         try (BufferedReader br = new BufferedReader(new FileReader("src/Data/" + csv))) {
@@ -30,7 +30,7 @@ final public class CsvReader {
         return gis_layer;
     }
 
-    private void dynamicPostion(String[] strs){
+    private static void dynamicPostion(String[] strs){
         for (int i = 0;i<strs.length;i++) {
             switch (strs[i]) {
                 case "MAC":
