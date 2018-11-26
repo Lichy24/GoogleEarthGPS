@@ -52,7 +52,7 @@ public final class MultiCSV {
          
 
          // get directories
- 		 String[] children = dir.list();
+ 		 String[] children = dir.list(filter);
  		 
          // for each sub-directory scan for CSV files again.
           for (String child:children) {
