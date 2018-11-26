@@ -26,7 +26,6 @@ public class GISLayer implements GIS_layer{
 	@Override
 	public void clear() {
 		elements.clear();
-		
 	}
 
 	@Override
