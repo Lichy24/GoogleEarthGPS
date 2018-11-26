@@ -16,12 +16,14 @@ public class MyCoords implements coords_converter{
 	}
 
 	@Override
-	public double distance3d(Point3D gps0, Point3D gps1) { //WORKS
-		//
-		//		double d = earth_radius*Math.sin(Point3D.d2r(gps1.x()-gps0.x()));
-		//		double d2 = earth_radius*earth_lon_norm*Math.sin(Point3D.d2r(gps1.y()-gps0.y()));
-		//		double norm = Math.sqrt((d*d+d2*d2));
+	public double distance3d(Point3D gps0, Point3D gps1) {
+		
+		double d = earth_radius*Math.sin(Point3D.d2r(gps1.x()-gps0.x()));
+		double d2 = earth_radius*earth_lon_norm*Math.sin(Point3D.d2r(gps1.y()-gps0.y()));
+		double d3 = gps1.z() - gps0.z();
+		double distance = Math.sqrt((d*d+d2*d2+d3));
 
+		/*
 		double deltaPhi,distance,deltaLamda,phi1,phi2,alphaRad,alphaDeg;
 		deltaLamda = Math.toRadians(gps1.y()) - Math.toRadians(gps0.y());
 		phi1 = Math.toRadians(gps0.x());
@@ -30,7 +32,7 @@ public class MyCoords implements coords_converter{
 		double a = Math.pow(Math.sin(deltaPhi/2),2)+Math.cos(phi1)*Math.cos(phi2)*Math.pow(Math.sin(deltaLamda/2),2);
 		double c = 2*Math.atan2(Math.sqrt(a),Math.sqrt(1-a));
 		distance =  earth_radius * c;
-
+		*/
 
 
 		return distance;
@@ -49,8 +51,9 @@ public class MyCoords implements coords_converter{
 
 	@Override
 	public Point3D vector3D(Point3D gps0, Point3D gps1) {	
+		double lon_norm = Math.cos(Math.toRadians(gps0.x()));
 		double x0 = earth_radius*Math.sin(Point3D.d2r(gps1.x()-gps0.x()));
-		double y0 = earth_radius*earth_lon_norm*Math.sin(Point3D.d2r(gps1.y()-gps0.y()));
+		double y0 = earth_radius*lon_norm*Math.sin(Point3D.d2r(gps1.y()-gps0.y()));
 		double z0 = gps1.z()-gps0.z();
 		
 		return new Point3D(x0,y0,z0);
@@ -119,7 +122,6 @@ public class MyCoords implements coords_converter{
 
 	
 	public Point3D test(Point3D gps0) {
-	
 		double x = earth_radius*Math.sin(Point3D.d2r(gps0.x()));
 		double y = earth_radius*earth_lon_norm*Math.sin(Point3D.d2r(gps0.y()));
 		
@@ -127,6 +129,7 @@ public class MyCoords implements coords_converter{
 	}
 	
 	public Point3D test2(Point3D v3d) {
+		double lon_norm = Math.acos(v3d.x());
 		double x = Math.toDegrees(Math.asin(v3d.x()/earth_radius));
 		double y = Math.toDegrees(Math.asin(v3d.y()/(earth_radius*earth_lon_norm)));
 		
