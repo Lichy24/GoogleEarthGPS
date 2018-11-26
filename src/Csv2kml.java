@@ -5,6 +5,7 @@ import java.util.Date;
 
 public class Csv2kml {
     private String csv,line,dateFormat;
+    private int lat,lon,firstSeen,SSID,mac,authMode,RSSI;
     private int count =0;
     private StringBuilder kmlTxt;
 
@@ -22,6 +23,9 @@ public class Csv2kml {
             while ((line=br.readLine())!= null){
                 count++;
                 String[] lineinfo = line.split(",");
+                if (count==2){
+                    dynamicPostion(lineinfo);
+                }
                 /*
                 for (String info:lineinfo) {
                     System.out.print(info+" , ");
@@ -29,13 +33,14 @@ public class Csv2kml {
                 System.out.println();
                 */
                 if (count>2){//first 2 lines are headers
-                    dateFormat = lineinfo[3].replaceAll("[APM]","");
+                    System.out.println(firstSeen);
+                    dateFormat = lineinfo[firstSeen].replaceAll("[APM]","");
                     format = new SimpleDateFormat("yyyy-mm-dd HH:mm:ss");
                     date = format.parse(dateFormat);
                     kmlTxt.append("<Placemark>\n");
-                    kmlTxt.append("<name><![CDATA["+lineinfo[1]+"]]></name>\n");
-                    kmlTxt.append("<description><![CDATA[BSSID: <b>"+lineinfo[0]+"</b><br/>Capabilities: <b>"+lineinfo[2]+"</b><br/>Frequency: <b>"+lineinfo[5]+"</b><br/>Timestamp: <b>"+date.getTime()+"</b><br/>Date: <b>"+lineinfo[3]+"</b>]]></description><styleUrl>#red</styleUrl>\n");
-                    kmlTxt.append("<Point>\n<coordinates>"+lineinfo[7]+","+lineinfo[6]+"</coordinates></Point>\n");
+                    kmlTxt.append("<name><![CDATA["+lineinfo[SSID]+"]]></name>\n");
+                    kmlTxt.append("<description><![CDATA[BSSID: <b>"+lineinfo[mac]+"</b><br/>Capabilities: <b>"+lineinfo[authMode]+"</b><br/>Frequency: <b>"+lineinfo[RSSI]+"</b><br/>Timestamp: <b>"+date.getTime()+"</b><br/>Date: <b>"+lineinfo[firstSeen]+"</b>]]></description><styleUrl>#red</styleUrl>\n");
+                    kmlTxt.append("<Point>\n<coordinates>"+lineinfo[lon]+","+lineinfo[lat]+"</coordinates></Point>\n");
                     kmlTxt.append("</Placemark>\n");
                 }
             }
@@ -66,7 +71,33 @@ public class Csv2kml {
         pw.write(kmlTxt.toString());//write kml txt to file.
         pw.close();//end
     }
-
+    private void dynamicPostion(String[] strs){
+        for (int i = 0;i<strs.length;i++) {
+            switch (strs[i]) {
+                case "MAC":
+                    mac = i;
+                    break;
+                case "SSID":
+                    SSID = i;
+                    break;
+                case "AuthMode":
+                    authMode = i;
+                    break;
+                case "FirstSeen":
+                    firstSeen = i;
+                    break;
+                case "RSSI":
+                    RSSI = i;
+                    break;
+                case "CurrentLatitude":
+                    lat = i;
+                    break;
+                case "CurrentLongitude":
+                    lon = i;
+                    break;
+            }
+        }
+    }
     private void setCsv(String csv) {
         this.csv = csv;
     }
