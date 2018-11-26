@@ -1,31 +1,33 @@
 package File_formats;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.util.Date;
 
-import GIS.GIS_layer;
+import GIS.*;
 
-public class CsvReader {
-    private  int mac,SSID,firstSeen,lat,lon,alt,RSSI,authMode,Type;
-    public CsvReader(String csv) {
+final public class CsvReader {
+    private int mac,SSID,firstSeen,lat,lon,alt,RSSI,channel,authMode,accuracy,Type;
+    GISLayer gis_layer;
+    public GIS_layer Read(String csv) {
         int count = 0;
         String line;
         try (BufferedReader br = new BufferedReader(new FileReader("src/Data/" + csv))) {
-            DateFormat format;
-            Date date;
+            gis_layer = new GISLayer();
             while ((line = br.readLine()) != null) {
                 count++;
                 String[] lineinfo = line.split(",");
                 if (count == 2) {
                     dynamicPostion(lineinfo);
                 }
+                gis_layer.add(new GISElement(lineinfo[lat],lineinfo[lon],lineinfo[alt],lineinfo[mac],lineinfo[SSID],lineinfo[authMode],lineinfo[firstSeen],lineinfo[channel],lineinfo[RSSI],lineinfo[accuracy],lineinfo[Type]));
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
-
+        return gis_layer;
     }
 
     private void dynamicPostion(String[] strs){
@@ -52,12 +54,19 @@ public class CsvReader {
                 case "CurrentLongitude":
                     lon = i;
                     break;
+                case "CurrentAltitude":
+                    lon = i;
+                    break;
+                case "Channel":
+                    channel = i;
+                    break;
+                case "AccuracyMeters":
+                    accuracy = i;
+                    break;
+                case "Type":
+                    Type = i;
+                    break;
             }
         }
     }
-
-	public static GIS_layer read(String child) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 }
