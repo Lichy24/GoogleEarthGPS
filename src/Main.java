@@ -2,6 +2,8 @@ import java.io.File;
 import java.io.FilenameFilter;
 
 import Coords.MyCoords;
+import File_formats.CsvReader;
+import GIS.GISLayer;
 import Geom.Point3D;
 
 public class Main {
@@ -12,7 +14,7 @@ public class Main {
 		testDistance3D();
 		testVector();
 		testAzimuth();
-
+		testCsv2Kml();
 
 
 
@@ -65,5 +67,11 @@ public class Main {
 		
 
 	}
+	
+	public static void testCsv2Kml() {
+		GISLayer layer =  (GISLayer) CsvReader.read("WigleWifi_20171201110209.csv");
+		System.out.println(layer);
+	}
+
 
 }

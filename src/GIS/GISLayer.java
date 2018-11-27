@@ -83,4 +83,10 @@ public class GISLayer implements GIS_layer{
 		return null;
 	}
 	
+	@Override
+	public String toString() {
+		//TODO
+		return "GISLayer toString() function isn't yet implemented";
+	}
+	
 }
