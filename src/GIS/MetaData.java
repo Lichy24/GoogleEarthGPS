@@ -45,4 +45,36 @@ public class MetaData implements Meta_data {
     public String toString() {//simple print.
         return "[ MAC: "+mac+" , SSID: "+ssid+" , AuthMode: "+authmode+" , Firstseen: "+firstseen+" , Channel: "+channel+" , RSSI: "+rssi+" , AccuracyMeters: "+accuracyMeters+" , Type: "+type+" ]";
     }
+
+    public String getMac() {
+        return mac;
+    }
+
+    public String getSsid() {
+        return ssid;
+    }
+
+    public String getAuthmode() {
+        return authmode;
+    }
+
+    public String getFirstseen() {
+        return firstseen;
+    }
+
+    public String getChannel() {
+        return channel;
+    }
+
+    public String getRssi() {
+        return rssi;
+    }
+
+    public String getAccuracyMeters() {
+        return accuracyMeters;
+    }
+
+    public String getType() {
+        return type;
+    }
 }
