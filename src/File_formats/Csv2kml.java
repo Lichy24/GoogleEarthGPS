@@ -3,6 +3,11 @@ import Algorithms.MultiCSV;
 import GIS.GIS_layer;
 import GIS.GIS_project;
 
+/**
+ * a static class used for Converting CVS files to a GIS objects (GIS_project | GIS_layer | GIS_element) and for converting GIS objects to KML files. <br>
+ * Note: using "CsvReader", "MultiCSV" and "BuildKML classes.
+ * @author Ofek Bader & Adi Lichy
+ */
 public class Csv2kml {
 
 	/**
@@ -34,5 +39,9 @@ public class Csv2kml {
 	 */
 	public static GIS_project readCSVDirectory(String DirPathName) {
 		return MultiCSV.readDirectory(DirPathName);
+	}
+	
+	public void createKMLfile(GIS_project project, String pathname) {
+		//return BuildKml.create(layer, fileName);
 	}
 }

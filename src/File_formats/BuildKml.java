@@ -12,14 +12,20 @@ import org.w3c.dom.Element;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import java.io.File;
+import java.io.StringWriter;
 import java.util.Iterator;
 
+/**
+ * a static class used to generate / create / build a kml file from a given GIS object (GIS_project | GIS_layer).
+ * @author Adi Lichy.
+ */
 public class BuildKml {
     private static DocumentBuilderFactory factory;
     private static DocumentBuilder builder;
@@ -113,7 +119,9 @@ public class BuildKml {
     private static void createFile(String fileName) throws TransformerException {//setting up kml file to put text into.
         TransformerFactory transformerFactory = TransformerFactory.newInstance();
         Transformer transformer = transformerFactory.newTransformer();
+        transformer.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
         DOMSource domSource = new DOMSource(document);
+
         StreamResult streamResult = new StreamResult(new File(fileName));
         transformer.transform(domSource,streamResult);
     }

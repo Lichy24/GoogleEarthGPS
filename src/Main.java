@@ -18,9 +18,6 @@ public class Main {
 		testVector();
 		testAzimuth();
 		testCsv2Kml();
-
-
-
 	}
 	
 	public static void testDistance3D() {
