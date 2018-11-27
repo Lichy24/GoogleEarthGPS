@@ -2,6 +2,11 @@ package Coords;
 
 import Geom.Point3D;
 
+/**
+ * class that manipulates GPS (geodetic/polar) points, can move a point by a vector (direction and length),
+ * calculate direction (azimuth) and elevation, distance and more.
+ * @author Ofek Bader
+ */
 public class MyCoords implements coords_converter{
 
 	private final static double earth_radius = 6378137;//ESTIMATE: 6371000;
@@ -40,10 +45,20 @@ public class MyCoords implements coords_converter{
 
 	
 
+	/**
+	 * Get the vector normal 3D value.
+	 * @param vector to get the normal from
+	 * @return double as the normal
+	 */
 	public double vectorNormal(Point3D vector) {
 		return Math.sqrt(vector.x()*vector.x()+vector.y()*vector.y()+vector.z()*vector.z());
 	}
 	
+	/**
+	 * Get the vector normal 2D value.
+	 * @param vector to get the normal from
+	 * @return double as the normal
+	 */
 	public double vectorNormal2D(Point3D vector) {
 		return Math.sqrt(vector.x()*vector.x()+vector.y()*vector.y());
 	}

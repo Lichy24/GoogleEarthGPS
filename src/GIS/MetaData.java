@@ -17,6 +17,17 @@ import java.util.TimeZone;
 public class MetaData implements Meta_data {
     private String mac,ssid,authmode,firstseen,channel,rssi, accuracyMeters,type;
 
+    /**
+     * Creates a new MetaData object.
+     * @param mac
+     * @param ssid
+     * @param authmode
+     * @param firstseen
+     * @param channel
+     * @param rssi
+     * @param accuracyMeters
+     * @param type
+     */
     public MetaData(String mac, String ssid, String authmode, String firstseen, String channel, String rssi, String accuracyMeters, String type) {
         this.mac = mac;
         this.ssid = ssid;
@@ -53,34 +64,66 @@ public class MetaData implements Meta_data {
         return "[ MAC: "+mac+" , SSID: "+ssid+" , AuthMode: "+authmode+" , Firstseen: "+firstseen+" , Channel: "+channel+" , RSSI: "+rssi+" , AccuracyMeters: "+accuracyMeters+" , Type: "+type+" ]";
     }
 
+    /**
+     * returns this object's mac
+     * @return mac address
+     */
     public String getMac() {
         return mac;
     }
 
+    /**
+     * returns this object's SSID
+     * @return SSID address
+     */
     public String getSsid() {
         return ssid;
     }
 
+    /**
+     * returns this Authentication Mode
+     * @return Auth Mode
+     */
     public String getAuthmode() {
         return authmode;
     }
 
+    /**
+     * Returns the "firstseen" attribute
+     * @return fristseen
+     */
     public String getFirstseen() {
         return firstseen;
     }
 
+    /**
+     * returns the radio channel used
+     * @return channel
+     */
     public String getChannel() {
         return channel;
     }
 
+    /**
+     * returns RSSI
+     * @return RSSI
+     */
     public String getRssi() {
         return rssi;
     }
 
+    /**
+     * returns the accuracy in meters
+     * @return accuracy
+     */
     public String getAccuracyMeters() {
         return accuracyMeters;
     }
 
+    /**
+     * returns this object's type
+     * @return type
+     */
     public String getType() {
         return type;
     }
