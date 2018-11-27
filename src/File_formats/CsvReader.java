@@ -14,7 +14,7 @@ final public class CsvReader {
 	public static GIS_layer read(String csv) {
 		int count = 0;
 		String line;
-		try (BufferedReader br = new BufferedReader(new FileReader("src/Data/" + csv))) {
+		try (BufferedReader br = new BufferedReader(new FileReader(csv))) {
 			gis_layer = new GISLayer();
 			while ((line = br.readLine()) != null) {
 				count++;

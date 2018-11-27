@@ -1,9 +1,11 @@
 import java.io.File;
 import java.io.FilenameFilter;
 
+import Algorithms.MultiCSV;
 import Coords.MyCoords;
 import File_formats.CsvReader;
 import GIS.GISLayer;
+import GIS.GISProject;
 import Geom.Point3D;
 
 public class Main {
@@ -69,8 +71,10 @@ public class Main {
 	}
 	
 	public static void testCsv2Kml() {
-		GISLayer layer =  (GISLayer) CsvReader.read("WigleWifi_20171201110209.csv");
+		GISLayer layer =  (GISLayer) CsvReader.read("src/Data/WigleWifi_20171201110209.csv");
 		System.out.println(layer);
+		
+		GISProject project = (GISProject) MultiCSV.readDirectory("src/Data/");
 	}
 
 
