@@ -3,6 +3,7 @@ import java.io.FilenameFilter;
 
 import Algorithms.MultiCSV;
 import Coords.MyCoords;
+import File_formats.BuildKml;
 import File_formats.CsvReader;
 import GIS.GISLayer;
 import GIS.GISProject;
@@ -72,8 +73,7 @@ public class Main {
 	
 	public static void testCsv2Kml() {
 		GISLayer layer =  (GISLayer) CsvReader.read("src/Data/WigleWifi_20171201110209.csv");
-		System.out.println(layer);
-		
+		BuildKml.create(layer, "src\\data\\Junk\\myKML.kml");
 		GISProject project = (GISProject) MultiCSV.readDirectory("src/Data/");
 	}
 

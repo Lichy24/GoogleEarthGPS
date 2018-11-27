@@ -5,6 +5,11 @@ import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+/**
+ * GISLayer is an objects implementing GIS_layer and represents a set of GIS_element objects.
+ * GISLayer is an object made from a single file of CSV
+ * @author Ofek Bader
+ */
 public class GISLayer implements GIS_layer{
 
 	Set<GIS_element> elements;

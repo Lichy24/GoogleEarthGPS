@@ -10,9 +10,9 @@ public class MyCoords implements coords_converter{
 
 	@Override
 	public Point3D add(Point3D gps, Point3D local_vector_in_meter) {
-		Point3D p3d = test(gps);
+		Point3D p3d = p2m(gps);
 		p3d.add(local_vector_in_meter);
-		return test2(p3d);
+		return m2p(p3d);
 	}
 
 	@Override
@@ -93,7 +93,7 @@ public class MyCoords implements coords_converter{
 		arr[1] = Math.toDegrees(Math.atan(A/B));
 		arr[2] = distance3d(gps0, gps1);
 		System.out.println("Tan-1: "+ Math.toDegrees(Math.atan(A/B))+" | Sin-1: " + Math.toDegrees(Math.asin(A/C)));
-		System.out.println("angle:" +Math.toDegrees(test(gps0).angleZ(test(gps1))));
+		System.out.println("angle:" +Math.toDegrees(p2m(gps0).angleZ(p2m(gps1))));
 
 
 
@@ -120,16 +120,24 @@ public class MyCoords implements coords_converter{
 	}
 
 
-	
-	public Point3D test(Point3D gps0) {
+	/**
+	 * Converts a point from polar coordinates to meters
+	 * @param gps0 the point to convert
+	 * @return new Point3D in meters
+	 */
+	public Point3D p2m(Point3D gps0) {
 		double x = earth_radius*Math.sin(Point3D.d2r(gps0.x()));
 		double y = earth_radius*earth_lon_norm*Math.sin(Point3D.d2r(gps0.y()));
 		
 		return new Point3D(x,y,gps0.z());
 	}
 	
-	public Point3D test2(Point3D v3d) {
-		double lon_norm = Math.acos(v3d.x());
+	/**
+	 * Converts a point from meter coordinates to polar coordinates
+	 * @param v3d the point to convert in meters
+	 * @return new Point3D in polar
+	 */
+	public Point3D m2p(Point3D v3d) {
 		double x = Math.toDegrees(Math.asin(v3d.x()/earth_radius));
 		double y = Math.toDegrees(Math.asin(v3d.y()/(earth_radius*earth_lon_norm)));
 		

@@ -1,7 +1,10 @@
+package File_formats;
+
 import GIS.GISElement;
 import GIS.GISLayer;
+import GIS.GIS_element;
 import GIS.MetaData;
-import Geom.GeomElement;
+import Geom.Point3D;
 import Geom.Point3D;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -10,7 +13,6 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerConfigurationException;
 import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
@@ -19,17 +21,24 @@ import java.io.File;
 import java.util.Iterator;
 
 public class BuildKml {
-    DocumentBuilderFactory factory;
-    DocumentBuilder builder;
-    Document document;
-    Element folder;
-    BuildKml(GISLayer layer,String fileName){
+    private static DocumentBuilderFactory factory;
+    private static DocumentBuilder builder;
+    private static Document document;
+    private static Element folder;
+    
+	/**
+	 * should be kept private because BuildKml should be a complete static class. <br>
+	 * there should be no instances of this class.
+	 */
+    private BuildKml() {}
+    
+    public static void create(GISLayer layer,String fileName){
         try {
             factory = DocumentBuilderFactory.newInstance();
             builder = factory.newDocumentBuilder();
             document = builder.newDocument();
             setupKml();//setup
-            Iterator iterator = layer.iterator();//elements from layer
+            Iterator<GIS_element> iterator = layer.iterator();//elements from layer
             while (iterator.hasNext()){
                 addGIS((GISElement)iterator.next());//casting and add
             }
@@ -38,10 +47,9 @@ public class BuildKml {
             e.printStackTrace();
         }
     }
-    private void addGIS(GISElement gisElement){//add gis element to kml.
+    private static void addGIS(GISElement gisElement){//add gis element to kml.
         MetaData data = (MetaData)gisElement.getData();
-        GeomElement geo = (GeomElement) gisElement.getGeom();
-        Point3D point3D = geo.getPoint();
+        Point3D geo = (Point3D) gisElement.getGeom();
         Element placemark = document.createElement("Placemark");
         folder.appendChild(placemark);
         Element name = document.createElement("name");
@@ -58,9 +66,9 @@ public class BuildKml {
         placemark.appendChild(point);
         Element coordinate = document.createElement("coordinate");
         point.appendChild(coordinate);
-        coordinate.appendChild(document.createTextNode(point3D.y()+","+point3D.x()));
+        coordinate.appendChild(document.createTextNode(geo.y()+","+geo.x()));
     }
-    private void setupKml() throws ParserConfigurationException {//kml starter
+    private static void setupKml() throws ParserConfigurationException {//kml starter
         Element root = document.createElement("kml");
         root.setAttribute("xmlns","http://www.opengis.net/kml/2.2");
         document.appendChild(root);
@@ -102,7 +110,7 @@ public class BuildKml {
         name.appendChild(document.createTextNode("Wifi Networks"));
         folder.appendChild(name);
     }
-    private void createFile(String fileName) throws TransformerException {//setting up kml file to put text into.
+    private static void createFile(String fileName) throws TransformerException {//setting up kml file to put text into.
         TransformerFactory transformerFactory = TransformerFactory.newInstance();
         Transformer transformer = transformerFactory.newTransformer();
         DOMSource domSource = new DOMSource(document);

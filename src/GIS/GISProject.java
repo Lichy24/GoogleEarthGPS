@@ -5,6 +5,11 @@ import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+/**
+ * GISProject is an objects implementing GIS_project and represents a set of GIS_layer objects.
+ * the GISProject object can be convert to KML with the Csv2Kml class.
+ * @author Ofek Bader
+ */
 public class GISProject implements GIS_project{
 
 	Set<GIS_layer> layers;

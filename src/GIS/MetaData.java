@@ -8,6 +8,12 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.TimeZone;
 
+/**
+ * Meta data object represents all the information about the object itself, mostly about the GISElement object.
+ * Contains data as mac address, ssid address and more.
+ * @author Adi Lichy
+ *
+ */
 public class MetaData implements Meta_data {
     private String mac,ssid,authmode,firstseen,channel,rssi, accuracyMeters,type;
 
@@ -25,7 +31,8 @@ public class MetaData implements Meta_data {
     @Override
     public long getUTC() {
         try {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        firstseen = firstseen.replace('-', '/');
         Date date = dateFormat.parse(firstseen);
             Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("UTC"));
             calendar.setTime(date);
