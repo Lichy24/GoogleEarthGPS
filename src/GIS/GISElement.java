@@ -48,6 +48,14 @@ public class GISElement implements GIS_element{
     }
     
     /**
+     * set the Geometric element (can be Point3D)
+     * @param Point3D geom
+     */
+    private void setGeom(Point3D geom){
+        geomElement = geom;
+    }
+    
+    /**
      * Set only Meta Data.
      * @param mac
      * @param ssid

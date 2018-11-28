@@ -2,9 +2,10 @@ package Algorithms;
 import java.io.File;
 import java.io.FilenameFilter;
 
+import File_formats.BuildKml;
 import File_formats.CsvReader;
 import GIS.GISProject;
-
+import GIS.GIS_layer;
 import GIS.GIS_project;
 
 /**
@@ -81,5 +82,23 @@ public final class MultiCSV {
 			for (String child:children) {
 				project.add(CsvReader.read(folder+"/"+child));
 			}
+	}
+	
+	/**
+	 * Exporting GIS_project type object to a single KML file that can be read by Google Earth.
+	 * @param project the GIS_project object to get the data from.
+	 * @param fileName relative path to save the KML file: EX: "Src/Data/myKML.kml"
+	 */
+	public static void createKML(GIS_project project, String fileName) {
+		BuildKml.create(project, fileName);
+	}
+	
+	/**
+	 * Exporting GIS_layer type object to a single KML file that can be read by Google Earth.
+	 * @param layer the GIS_layer object to get the data from.
+	 * @param fileName relative path to save the KML file: EX: "Src/Data/myKML.kml"
+	 */
+	public static void createKML(GIS_layer layer, String fileName) {
+		BuildKml.create(layer, fileName);
 	}
 }

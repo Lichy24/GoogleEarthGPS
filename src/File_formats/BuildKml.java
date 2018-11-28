@@ -37,7 +37,7 @@ public class BuildKml {
 	 */
     private BuildKml() {}
     
-    public static void create(GISProject project, String fileName){
+    public static void create(GIS_project project, String fileName){
         try {
             isProject = true;
             factory = DocumentBuilderFactory.newInstance();
@@ -58,7 +58,13 @@ public class BuildKml {
             isProject = false;
         }
     }
-    public static void create(GISLayer layer, String fileName){
+    
+    /**
+     * 
+     * @param layer
+     * @param fileName
+     */
+    public static void create(GIS_layer layer, String fileName){
         try {
             if(!isProject) {
                 factory = DocumentBuilderFactory.newInstance();

@@ -13,9 +13,11 @@ import java.util.Set;
 public class GISLayer implements GIS_layer{
 
 	Set<GIS_element> elements;
+	private MetaDataSet metadata;
 	
 	public GISLayer() {
 		elements = new LinkedHashSet<GIS_element>();
+		metadata = new MetaDataSet();
 	}
 
 	@Override
@@ -85,7 +87,7 @@ public class GISLayer implements GIS_layer{
 
 	@Override
 	public Meta_data get_Meta_data() {
-		return null;
+		return metadata;
 	}
 	
 	@Override

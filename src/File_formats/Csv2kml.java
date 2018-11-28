@@ -41,7 +41,21 @@ public class Csv2kml {
 		return MultiCSV.readDirectory(DirPathName);
 	}
 	
-	public void createKMLfile(GIS_project project, String pathname) {
-		//return BuildKml.create(layer, fileName);
+	/**
+	 * creates a KML file from given GIS_project object.
+	 * @param project GIS_project type
+	 * @param pathname relative path filename with Path+FileName+File Extension, EX: "Src/Data/myKML.kml"
+	 */
+	public static void createKMLFile(GIS_project project, String pathname) {
+		MultiCSV.createKML(project, pathname);
+	}
+	
+	/**
+	 * creates a KML file from given GIS_layer object.
+	 * @param layer GIS_layer type
+	 * @param pathname relative path filename with Path+FileName+File Extension, EX: "Src/Data/myKML.kml"
+	 */
+	public static void createKMLFile(GIS_layer layer, String pathname) {
+		MultiCSV.createKML(layer, pathname);
 	}
 }

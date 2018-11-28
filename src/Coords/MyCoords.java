@@ -23,12 +23,15 @@ public class MyCoords implements coords_converter{
 	@Override
 	public double distance3d(Point3D gps0, Point3D gps1) {
 		
-		double d = earth_radius*Math.sin(Point3D.d2r(gps1.x()-gps0.x()));
-		double d2 = earth_radius*earth_lon_norm*Math.sin(Point3D.d2r(gps1.y()-gps0.y()));
-		double d3 = gps1.z() - gps0.z();
-		double distance = Math.sqrt((d*d+d2*d2+d3));
+		// BOAZ'S ALGORITHM
+		
+//		double d = earth_radius*Math.sin(Point3D.d2r(gps1.x()-gps0.x()));
+//		double d2 = earth_radius*earth_lon_norm*Math.sin(Point3D.d2r(gps1.y()-gps0.y()));
+//		double d3 = gps1.z() - gps0.z();
+//		double distance = Math.sqrt((d*d+d2*d2+d3));
 
-		/*
+		// more accurate algorithm calculation.
+		
 		double deltaPhi,distance,deltaLamda,phi1,phi2,alphaRad,alphaDeg;
 		deltaLamda = Math.toRadians(gps1.y()) - Math.toRadians(gps0.y());
 		phi1 = Math.toRadians(gps0.x());
@@ -37,7 +40,7 @@ public class MyCoords implements coords_converter{
 		double a = Math.pow(Math.sin(deltaPhi/2),2)+Math.cos(phi1)*Math.cos(phi2)*Math.pow(Math.sin(deltaLamda/2),2);
 		double c = 2*Math.atan2(Math.sqrt(a),Math.sqrt(1-a));
 		distance =  earth_radius * c;
-		*/
+		
 
 
 		return distance;
@@ -103,7 +106,7 @@ public class MyCoords implements coords_converter{
 
 		arr[0] = alphaDeg;
 		double A = (gps1.z()-gps0.z());
-		double C = distance3d(gps0,gps1); //vectorNormal2D(vector3D(gps0, gps1));//
+		double C = distance3d(gps0,gps1);
 		double B = Math.sqrt(C*C-A*A);
 		arr[1] = Math.toDegrees(Math.atan(A/B));
 		arr[2] = distance3d(gps0, gps1);
