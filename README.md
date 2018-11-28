@@ -34,6 +34,49 @@ it uses the **"CsvReader"** class to read Csv files and convert them into GIS ob
 
 ## How to use?
 #### Generating GIS-type objects from CSV files on the file system.
+Read from CSV file into GIS_layer object using the CsvReader static class from File_formats package.
 ```java
-// add here examples of reading CSV files, creating GIS elements, creating KML files.
+// ok style: using the CsvReader class directly
+GISLayer layer = CsvReader.read("src/Data/WigleWifi_20171201110209.csv");
+
+// prefered style: using the Csv2Kml class 
+GISLayer layer = Csv2Kml.readCSVFile("src/Data/WigleWifi_20171201110209.csv");
 ```
+Read multipe CSV files from a directory path into GIS_project object using the CsvReader static class from File_formats package.
+```java
+// ok style: using the MultiCSV class directly
+GISProject project = MultiCSV.readDirectory("src/Data/");
+
+// prefered style: using the Csv2Kml class 
+GISProject project = Csv2Kml.readCSVDirectory("src/Data/");
+```
+*Note: all read operations are relative to current application run origin.*
+#### Using GIS-type elements
+**"GISElement"**-> the basic object that holds data about coordinates.
+```java
+//TODO: DESCRIPTION ABOUT GIS-TYPE ELEMENTS
+```
+#### Building a KML file from GISProject object.
+Example on how to export GISProject as KML file.
+The syntax:
+```java
+// ok style: using the BuildKml class directly
+BuildKml.create(GIS_project project, String filename);
+
+// prefered style: using the Csv2Kml class 
+Csv2Kml.createKML(GIS_project project, String filename);
+```
+*Note: filename includes relative path + file name + file extension*
+Example:
+```java
+// ok style: using the BuildKml class directly
+BuildKml.create(project, "src/Data/myKML.kml");
+
+// prefered style: using the Csv2Kml class
+Csv2Kml.createKML(project, "src/Data/myKML.kml");
+```
+Here we see: 
+	-"src/Data/" as relative path.
+	-"myKML" as file name.
+	-".kml" as file extension.
+
