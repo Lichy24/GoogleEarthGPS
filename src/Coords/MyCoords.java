@@ -119,8 +119,32 @@ public class MyCoords implements coords_converter{
 		return arr;
 	}
 
+	
+	/**
+	 * returns TRUE if the given point is a valid GPS point by the following criteria: <Br>
+	 * Lat: (-90, 90), Lon: (-180.180), Alt:(-450,inf)
+	 * @param p
+	 * @return true iff the point is a valid GPS point.
+	 */
+	public boolean isValid_GPS_Point_Rotated(Point3D p) {
+
+		// if lon is out of range of (-180, 180) than it's an invalid GPS point
+		if(p.y() < -180 && p.y() > 180)
+			return false;
+
+		// if lat is out of range of (-90, 90) than it's an invalid GPS point
+		if(p.x() < -90 && p.x() > 90)
+			return false;
+
+		// if alt is out of range of (-450, +inf) than it's an invalid GPS point
+		if(p.z() < -450)
+			return false;
+
+		return true;
+	}
+	
 	@Override
-	public boolean isValid_GPS_Point(Point3D p) { // works (?)
+	public boolean isValid_GPS_Point(Point3D p) {
 
 		// if lat is out of range of (-180, 180) than it's an invalid GPS point
 		if(p.x() < -180 && p.x() > 180)

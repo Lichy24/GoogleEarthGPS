@@ -20,11 +20,9 @@ public class TestMyCoords {
     }
 
 	
-	@Test
-	public void testAdd() {
-		
-	}
-	
+	/**
+	 * Testing the Distance value returned by given points, also make use of the"VectorNormal2D" and "VectorNormal" functions.
+	 */
 	@Test
 	public void testDistance() {
 		System.out.println("-------- Distance3D tests ----------");
@@ -38,9 +36,11 @@ public class TestMyCoords {
 		
 		assertTrue("distance should be around 493.6",dist > (493.6-approximity) && dist < (493.6+approximity));
 		System.out.println("Distance3D: "+ dist + " | distByVector: " + distByVector + " | distByVectorBoaz: " + distByVectorBoaz);
-	
 	}
 	
+	/**
+	 * Tests the Vector3D function, make use of "add" function/
+	 */
 	@Test
 	public void testVector3D() {
 		System.out.println("-------- Vector tests ----------");
@@ -60,22 +60,22 @@ public class TestMyCoords {
 		
 	}
 	
+	/**
+	 * testing azimuth elevation and distance function. the distance function is already tested in another case.
+	 */
 	@Test
 	public void testAzimuth() {
 		System.out.println("-------- Azimuth tests ----------");
 		
 		Point3D b9 = new Point3D(32.103315 ,35.209039,670);
 		Point3D humus = new Point3D(32.106352,35.205225,650);
-		Point3D az1 = new Point3D(44,34,600);
-		Point3D az2 = new Point3D(44,33.9,633);
-		
-		double[] azi = m.azimuth_elevation_dist(az1, az2);
+
+		double[] azi = m.azimuth_elevation_dist(b9, humus);
 		System.out.println(azi[0]+" | " +azi[1] + " | "+azi[2]);
 		
-		
-		
-		azi = m.azimuth_elevation_dist(b9, humus);
-		System.out.println(azi[0]+" | " +azi[1] + " | "+azi[2]);
+		assertTrue("Should return correct elevation values" ,(azi[0] > 313.23-approximity && azi[0] < 313.23+approximity ));
+		assertTrue("Should return correct elevation values" ,(azi[1] > -2.32-approximity && azi[1] < -2.32+approximity ));
+
 		
 	}
 
