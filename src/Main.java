@@ -72,8 +72,9 @@ public class Main {
 	
 	public static void testCsv2Kml() {
 		GISLayer layer =  (GISLayer) CsvReader.read("src/Data/WigleWifi_20171201110209.csv");
-		BuildKml.create(layer, "src\\data\\Junk\\myKML.kml");
 		GISProject project = (GISProject) MultiCSV.readDirectory("src/Data/");
+		BuildKml.create(project, "src\\data\\Junk\\myKML.kml");
+		
 	}
 
 

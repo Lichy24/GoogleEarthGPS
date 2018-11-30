@@ -47,8 +47,7 @@ public class MetaData implements Meta_data {
     @Override
     public long getUTC() {
         try {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-        firstseen = firstseen.replace('-', '/');
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Date date = dateFormat.parse(firstseen);
             Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("UTC"));
             calendar.setTime(date);
