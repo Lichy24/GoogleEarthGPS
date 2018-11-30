@@ -1,11 +1,16 @@
+package Coords;
 import static org.junit.Assert.*;
 
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import Coords.MyCoords;
 import Geom.Point3D;
 
+/**
+ * Testing class using JUNIT4 for testing "MyCoords" class
+ * @author Ofek Bader
+ *
+ */
 public class TestMyCoords {
 
 	static MyCoords m;
@@ -15,8 +20,8 @@ public class TestMyCoords {
 	@BeforeClass
     public static void oneTimeSetUp() {
         m = new MyCoords(); 
-        approximity = 0.1;
-        pointApprox = 0.001;
+        approximity = 0.1; //meters
+        pointApprox = 0.00001; //polar
     }
 
 	

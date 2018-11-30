@@ -15,9 +15,9 @@ public class MyCoords implements coords_converter{
 
 	@Override
 	public Point3D add(Point3D gps, Point3D local_vector_in_meter) {
-		Point3D p3d = p2m(gps);
-		p3d.add(local_vector_in_meter);
-		return m2p(p3d);
+		Point3D newp = m2p(local_vector_in_meter);
+		newp.add(gps);
+		return newp;
 	}
 
 	@Override
