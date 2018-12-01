@@ -19,7 +19,7 @@ public class MetaData implements Meta_data {
 
     /**
      *  Creates a new MetaData object for GISElement.
-     * @param mac String of machine id
+     * @param mac String of machine id.
      * @param ssid String display name of device.
      * @param authmode String type of encryption.
      * @param firstseen String exact date of device been seen.
@@ -114,7 +114,7 @@ public class MetaData implements Meta_data {
      * get_Orientation not implemented yet.
      * @return null
      */
-    @Override//TODO need cooords_converter method azimuth_elevation_dist to set orientation.
+    @Override//TODO need coords_converter method azimuth_elevation_dist to set orientation.
     public Point3D get_Orientation() {
         return null;
     }

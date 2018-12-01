@@ -89,11 +89,23 @@ public class GISLayer implements GIS_layer{
 	public Meta_data get_Meta_data() {
 		return metadata;
 	}
-	
+
+	/**
+	 * toString create a string of all contained object in GISLayer.
+	 * @return String of GIS Layer.
+	 */
 	@Override
 	public String toString() {
-		//TODO
-		return "GISLayer toString() function isn't yet implemented";
+		Iterator iterator = iterator();
+		int count = 1;
+		String str = "Layer:[ ";
+		while (iterator.hasNext()){
+			str += count+" "+iterator.next().toString()+" , ";
+			count++;
+		}
+		str = str.substring(0,str.length()-2);
+		str += "]\n";
+		return str;
 	}
 	
 }

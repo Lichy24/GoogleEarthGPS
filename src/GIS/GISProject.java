@@ -92,4 +92,21 @@ public class GISProject implements GIS_project{
 		return metadata;
 	}
 
+	/**
+	 * toString create a string of all contained object in GISProject.
+	 * @return String of GISProject.
+	 */
+	@Override
+	public String toString() {
+		Iterator iterator = iterator();
+		String str = "Project:[ ";
+		int count = 1;
+		while (iterator.hasNext()){
+			str += count +" "+ iterator.next().toString()+" , ";
+			count++;
+		}
+		str = str.substring(0,str.length()-2);
+		str += "]";
+		return str;
+	}
 }
