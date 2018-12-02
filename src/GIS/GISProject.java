@@ -100,6 +100,8 @@ public class GISProject implements GIS_project{
 	public String toString() {
 		Iterator iterator = iterator();
 		String str = "Project:[ ";
+		if (!iterator.hasNext())
+			return str+"]\n";
 		int count = 1;
 		while (iterator.hasNext()){
 			str += count +" "+ iterator.next().toString()+" , ";

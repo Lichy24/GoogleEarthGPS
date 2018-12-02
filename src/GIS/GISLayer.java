@@ -99,6 +99,8 @@ public class GISLayer implements GIS_layer{
 		Iterator iterator = iterator();
 		int count = 1;
 		String str = "Layer:[ ";
+		if (!iterator.hasNext())
+			return str+"]\n";
 		while (iterator.hasNext()){
 			str += count+" "+iterator.next().toString()+" , ";
 			count++;
